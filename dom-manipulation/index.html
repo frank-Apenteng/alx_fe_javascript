@@ -1,1 +1,57 @@
-index file added
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Quote Generator</title>
+    <!-- Basic CSS for styling the application -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        text-align: center;
+        padding: 20px;
+      }
+      #quoteDisplay {
+        font-size: 1.5em;
+        margin: 20px;
+        color: #333;
+      }
+      input,
+      select,
+      button {
+        padding: 10px;
+        margin: 5px;
+        font-size: 1em;
+      }
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dynamic Quote Generator</h1>
+    <!-- Dropdown to filter quotes by category -->
+    <div>
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+      </select>
+    </div>
+    <!-- Container to display the selected quote -->
+    <div id="quoteDisplay"></div>
+    <!-- Button to show a new quote -->
+    <button id="newQuote">Show New Quote</button>
+    <!-- Form to add a new quote and its category -->
+    <div>
+      <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+      <input
+        id="newQuoteCategory"
+        type="text"
+        placeholder="Enter quote category"
+      />
+      <button id="addQuoteButton">Add Quote</button>
+    </div>
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+  </body>
+</html>
