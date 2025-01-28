@@ -861,32 +861,36 @@ function exportToJsonFile() {
   URL.revokeObjectURL(url);
 }
 
-// Function to sync with server
-function syncWithServer() {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+// Function to fetch quotes from server
+function fetchQuotesFromServer() {
+  return fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => response.json())
     .then(serverQuotes => {
-      // Mock syncing logic: server data takes precedence
-      const serverQuotesData = serverQuotes.map(quote => ({
+      return serverQuotes.map(quote => ({
         text: quote.title,
         category: "Server"
       }));
-      
-      // Combine local and server quotes
-      const combinedQuotes = [...serverQuotesData, ...quotes];
-      
-      // Remove duplicates based on text
-      const uniqueQuotes = combinedQuotes.filter((quote, index, self) =>
-        index === self.findIndex((q) => q.text === quote.text)
-      );
-
-      quotes = uniqueQuotes;
-      saveQuotes();
-      populateCategories();
-      showRandomQuote();
-
-      notifyUser('Quotes synced with server successfully.');
     });
+}
+
+// Function to sync with server
+function syncWithServer() {
+  fetchQuotesFromServer().then(serverQuotes => {
+    // Mock syncing logic: server data takes precedence
+    const combinedQuotes = [...serverQuotes, ...quotes];
+
+    // Remove duplicates based on text
+    const uniqueQuotes = combinedQuotes.filter((quote, index, self) =>
+      index === self.findIndex((q) => q.text === quote.text)
+    );
+
+    quotes = uniqueQuotes;
+    saveQuotes();
+    populateCategories();
+    showRandomQuote();
+
+    notifyUser('Quotes synced with server successfully.');
+  });
 }
 
 // Function to notify the user
@@ -894,7 +898,7 @@ function notifyUser(message) {
   const notification = document.getElementById('notification');
   notification.innerText = message;
   notification.style.display = 'block';
-  
+
   setTimeout(() => {
     notification.style.display = 'none';
   }, 3000);
@@ -930,3 +934,4 @@ document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 document.getElementById('addQuoteButton').addEventListener('click', addQuote);
 document.getElementById('categoryFilter').addEventListener('change', filterQuotes);
 document.getElementById('exportButton').addEventListener('click', exportToJsonFile);
+
