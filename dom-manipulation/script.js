@@ -1152,4 +1152,3 @@ window.onload = async function() {
 // Attach event listeners
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 document.getElementById('addQuoteButton').addEventListener('click', addQuote);
-document.getElementById('categoryFilter[_{{{CITATION{{{_1{](https://github.com/ashish44khanal/Lumbini-Seed-Company/tree/2e6fe7af55ca8485264a6468ef6b4e0c69584490/product_search.php)
